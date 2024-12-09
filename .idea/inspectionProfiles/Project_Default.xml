@@ -1,0 +1,60 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="LanguageDetectionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyBroadExceptionInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyMethodMayBeStaticInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="14">
+            <item index="0" class="java.lang.String" itemvalue="selenium" />
+            <item index="1" class="java.lang.String" itemvalue="pytest" />
+            <item index="2" class="java.lang.String" itemvalue="webdriver_manager" />
+            <item index="3" class="java.lang.String" itemvalue="pytest-html" />
+            <item index="4" class="java.lang.String" itemvalue="numpy" />
+            <item index="5" class="java.lang.String" itemvalue="pyautogui" />
+            <item index="6" class="java.lang.String" itemvalue="allure-pytest" />
+            <item index="7" class="java.lang.String" itemvalue="jproperties" />
+            <item index="8" class="java.lang.String" itemvalue="opencv-python" />
+            <item index="9" class="java.lang.String" itemvalue="PyYAML" />
+            <item index="10" class="java.lang.String" itemvalue="requests" />
+            <item index="11" class="java.lang.String" itemvalue="auto-metamask" />
+            <item index="12" class="java.lang.String" itemvalue="dcentralab-qa-infra-automation" />
+            <item index="13" class="java.lang.String" itemvalue="cytoolz" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E722" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+          <option value="N806" />
+          <option value="N803" />
+          <option value="N812" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="Tests.InAppVestingWebTest.TestInAppVestingWeb.driver" />
+          <option value="list.get" />
+          <option value="tests.test_hord_deposit.TestHordDeposit.driver" />
+          <option value="tests.test_deposit.TestDeposit.driver" />
+          <option value="tests.home.login_tests.LoginTests.driver" />
+          <option value="src.dcentralab_qa_infra_automation.pages.coinbasePages.ImportWalletPage.ImportWalletPage.is_button_enable" />
+          <option value="tests.test_redeem.TestRedeem.driver" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
