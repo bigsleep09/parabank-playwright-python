@@ -24,6 +24,5 @@
    pip install -r requirements.txt
    playwright install
 3. Run the tests
-
 ```bash
    pytest --alluredir=allure-results
