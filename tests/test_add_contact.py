@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import expect
 
@@ -10,6 +11,8 @@ from utils.file_handler import get_json
 
 @pytest.mark.parametrize("login_credentials", get_json("resources/login_data.jsonc"))
 @pytest.mark.user_interface
+@allure.title("Add Contact")
+@allure.description("Test to perform add contact scenario")
 def test_add_contact(setup, login_credentials: dict[str, object]):
     """
     Test for adding a new contact to the contact list.

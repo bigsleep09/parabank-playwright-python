@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import Page
 
@@ -8,6 +9,8 @@ from utils.file_handler import get_json
 
 
 @pytest.mark.user_interface
+@allure.title("Registration New User")
+@allure.description("Test to perform registration scenario")
 def test_registration(setup):
     """
     Test case for the user registration process.
