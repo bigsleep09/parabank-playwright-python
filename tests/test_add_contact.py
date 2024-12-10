@@ -15,7 +15,7 @@ def test_add_contact(setup, login_credentials: dict[str, object]):
     Test for adding a new contact to the contact list.
 
     This test logs in using the provided credentials, navigates to the 'Add Contact' page,
-    adds new contacts as per the data in the resources/add_contact.jsonc file,
+    adds new contacts as per the data in the resources/add_contact_data.jsonc file,
     and verifies that the newly added contact appears in the contact list.
 
     Parameters:
@@ -27,7 +27,7 @@ def test_add_contact(setup, login_credentials: dict[str, object]):
     Steps:
         1. Log in using the credentials provided.
         2. Navigate to the 'Add Contact' page.
-        3. Add contacts by filling in their details from the add_contact.jsonc file.
+        3. Add contacts by filling in their details from the add_contact_data.jsonc file.
         4. Validate that the newly added contact is listed in the contact list.
         5. Assert that the contact appears in the table based on their email.
 
@@ -47,7 +47,7 @@ def test_add_contact(setup, login_credentials: dict[str, object]):
     contact_list_page.is_logged_in()
 
     # Fetching the contacts data to be added
-    contacts_to_add: list[dict[str, object]] = get_json("resources/add_contact.jsonc")
+    contacts_to_add: list[dict[str, object]] = get_json("resources/add_contact_data.jsonc")
 
     # Adding contacts
     for contact in contacts_to_add:

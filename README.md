@@ -20,19 +20,23 @@
 │   ├── locators
 │   │   └── contact_list_locators.py
 │   ├── pages
+│   │   ├── add_contact_page.py
 │   │   ├── contact_details_page.py
 │   │   ├── contacts_list_page.py
-│   │   ├── home_page.py
+│   │   └── edit_contact_page.py
+│   │   └── home_page.py
 │   │   └── registration_page.py
 │   ├── resources
+│   │   └── add_contact_data.jsonc
 │   │   ├── login_data.jsonc
 │   │   └── registration_data.jsonc
+│   │   └── update_contact_data.jsonc
 │   ├── tests
 │   │   ├── test_add_contact.py
 │   │   ├── test_api_contact_list.py
+│   │   └── test_edit_contact.py
 │   │   ├── test_login.py
 │   │   ├── test_registration.py
-│   │   └── test_edit_contact.py
 │   ├── utils
 │   │   ├── api.py
 │   │   ├── base_page.py
