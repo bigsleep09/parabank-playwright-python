@@ -2,13 +2,15 @@ import os
 
 import allure
 import pytest
-from playwright.sync_api import sync_playwright, Browser, BrowserContext, Page
+from playwright.sync_api import sync_playwright, Browser, BrowserContext, Page, APIRequestContext
+
+from utils.api import APIClient
+
+MAIN_URL: str = "https://thinking-tester-contact-list.herokuapp.com"
 
 
 @pytest.fixture(scope="function")
 def setup():
-    MAIN_URL: str = "https://thinking-tester-contact-list.herokuapp.com/"
-
     with sync_playwright() as playwright:
         browser: Browser = playwright.chromium.launch(headless=False, slow_mo=500, args=['--start-maximized'])
         context: BrowserContext = browser.new_context(no_viewport=True)
@@ -18,11 +20,22 @@ def setup():
         browser.close()
 
 
+@pytest.fixture(scope="session")
+def api_client():
+    with sync_playwright() as playwright:
+        request_context: APIRequestContext = playwright.request.new_context()
+        client = APIClient(request_context, MAIN_URL)
+        yield client
+        request_context.dispose()
+
+
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item):
     # Hook to add a screenshot to Allure in case of test failure
     outcome = yield
     report = outcome.get_result()
+    if "api" in item.keywords:  # Check for the @pytest.mark.api marker
+        return
     if report.when == "call" and report.failed:
         try:
             page = item.funcargs["setup"]  # Access 'setup' fixture (the page object)

@@ -1,60 +1,37 @@
-from datetime import datetime
-from typing import Literal
-
-import allure
-import json5
-import requests
+from playwright.sync_api import APIRequestContext, APIResponse
 
 
-@allure.step("send_request")
-def send_request(
-        method: str,
-        url: str,
-        options_type: str = Literal["params", "data", "json"],
-        options: dict[str, object] | None = {},
-        print_response: bool = True,
-        print_request: bool = True,
-        print_headers: bool = False,
-) -> dict[str, object] | str:
-    send_time = datetime.now()
+class APIClient:
+    def __init__(self, request_context: APIRequestContext, base_url: str):
+        self.request = request_context
+        self.base_url = base_url
+        self.token = None
+        self.contact_id = None
 
-    if print_request:
-        print(f"\nSending request at {send_time} to: {url} with params:\n{options}")
+    def set_token(self, token: str):
+        self.token = token
 
-    method = method.lower()
-    options_type = options_type.lower()
+    def set_contact_id(self, contact_id: str):
+        self.contact_id = contact_id
 
-    request_type = {"get": requests.get, "post": requests.post}
+    def get_contact_id(self):
+        return self.contact_id
 
-    if method not in request_type:
-        raise ValueError(f"Unsupported method: {method}")
+    def _headers(self) -> dict[str, str]:
+        headers = {"Content-Type": "application/json",
+                   "Cookie": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzU2ZjkyNWRlY2U3NjAwMTNkZjczYmQiLCJpYXQiOjE3MzM4MjQ0OTd9.LPYdGcfqZZG6eywmVRQR4AGjspEVkwTsbiOr9He4rDs"}
+        if self.token:
+            headers["Authorization"] = f"Bearer {self.token}"
+        return headers
 
-    if options_type not in {"params", "data", "json"}:
-        raise ValueError(f"Unsupported options type: {options_type}")
+    def post(self, endpoint: str, payload: dict) -> APIResponse:
+        return self.request.post(f"{self.base_url}/{endpoint}", headers=self._headers(), data=payload)
 
-    response: requests.Response = request_type[method](
-        url=url, **{options_type: options}
-    )
+    def get(self, endpoint: str) -> APIResponse:
+        return self.request.get(f"{self.base_url}/{endpoint}", headers=self._headers())
 
-    response_time = datetime.now()
+    def put(self, endpoint: str, payload: dict) -> APIResponse:
+        return self.request.put(f"{self.base_url}/{endpoint}", headers=self._headers(), data=payload)
 
-    response_content: str = response.content.decode(encoding="utf-8")
-    response_content_body: dict[str, object] = {}
-    try:
-        response_content_body = json5.loads(response_content)
-    except Exception:
-        print("Exception raised while trying to json load the response_content.")
-
-    if print_response:
-        if print_headers:
-            print(
-                f"\nResponse headers: {response.headers}"
-            )
-        print(
-            f"\nResponse body received at {response_time}: {response_content_body}"
-        )
-
-    if bool(response_content_body):
-        return response_content_body
-    else:
-        return response_content
+    def delete(self, endpoint: str) -> APIResponse:
+        return self.request.delete(f"{self.base_url}/{endpoint}", headers=self._headers())
