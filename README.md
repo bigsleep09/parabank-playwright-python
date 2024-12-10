@@ -89,16 +89,17 @@ allure serve allure-results
 
 #### test_add_contact.py
 
--
+- test_add_contact
 
 #### test_login.py
 
--
+- test_login_with_valid_credentials
 
 #### test_registration.py
 
--
+- test_registration
 
-#### test_update_contact.py
+#### test_edit_contact.py
 
-
+- test_update_contact
+- test_delete_contact

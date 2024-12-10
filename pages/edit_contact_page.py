@@ -1,17 +1,16 @@
 import allure
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect, Page
 
-from locators.contact_list_locators import AddContactPageLocators
+from locators.contact_list_locators import EditContactPageLocators
 from utils.base_page import BasePage
 
 
-class AddContactPage(BasePage):
+class EditContactPage(BasePage):
     """
-    Represents the Add Contact Page in the application.
+    Represents the Edit Contact Page in the application.
 
-    Provides methods for interacting with the page, such as verifying if the page is loaded,
-    filling out contact details, and submitting the form. Includes Allure steps for detailed
-    test reporting.
+    Provides methods to interact with the Edit Contact Page elements, such as filling out the form,
+    submitting the form, and handling various input fields for updating contact details.
 
     Attributes:
         page (Page): The Playwright page instance for interacting with the browser.
@@ -19,41 +18,40 @@ class AddContactPage(BasePage):
 
     def __init__(self, page: Page):
         """
-        Initializes the AddContactPage class.
+        Initializes the EditContactPage.
 
         Args:
             page (Page): The Playwright page instance.
         """
         super().__init__(page)
 
-    @allure.step("Verify Add Contact page is loaded")
+    @allure.step("Verify Edit Contact page is loaded")
     def is_page_loaded(self):
         """
-        Verifies that the Add Contact page is loaded by checking the current URL.
+        Verifies that the Edit Contact Page has successfully loaded by checking the URL.
 
         Raises:
-            Exception: If the current URL does not match the expected URL.
+            AssertionError: If the current URL does not match the expected URL.
         """
-        expected_url: str = "https://thinking-tester-contact-list.herokuapp.com/addContact"
         try:
-            expect(self.page).to_have_url(expected_url)
+            expect(self.page).to_have_url("https://thinking-tester-contact-list.herokuapp.com/editContact")
         except AssertionError as e:
-            self._attach_screenshot("Expected URL doesn't match with Actual")
-            raise Exception(f"Error comparing URL. {str(e)}")
+            self._attach_screenshot("Page Load Failure")
+            raise AssertionError(f"Edit Contact Page did not load correctly: {str(e)}")
 
     @allure.step("Enter first name: {first_name}")
     def _input_first_name(self, first_name: str):
         """
-        Inputs the first name into the corresponding field.
+        Enters the first name into the first name input field.
 
         Args:
-            first_name (str): The first name to input.
+            first_name (str): The first name to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.first_name_input, first_name)
+            self.fill_input(EditContactPageLocators.first_name_input, first_name)
         except Exception as e:
             self._attach_screenshot("Failed to insert first name")
             raise Exception(f"Error inserting first name {str(e)}")
@@ -61,16 +59,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter last name: {last_name}")
     def _input_last_name(self, last_name: str):
         """
-        Inputs the last name into the corresponding field.
+        Enters the last name into the last name input field.
 
         Args:
-            last_name (str): The last name to input.
+            last_name (str): The last name to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.last_name_input, last_name)
+            self.fill_input(EditContactPageLocators.last_name_input, last_name)
         except Exception as e:
             self._attach_screenshot("Failed to insert last name")
             raise Exception(f"Error inserting last name {str(e)}")
@@ -78,16 +76,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter birthdate: {birthdate}")
     def _input_birthdate(self, birthdate: str):
         """
-        Inputs the birthdate into the corresponding field.
+        Enters the birthdate into the birthdate input field.
 
         Args:
-            birthdate (str): The birthdate to input.
+            birthdate (str): The birthdate to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.birthdate_input, birthdate)
+            self.fill_input(EditContactPageLocators.birthdate_input, birthdate)
         except Exception as e:
             self._attach_screenshot("Failed to insert birthdate")
             raise Exception(f"Error inserting birthdate {str(e)}")
@@ -95,16 +93,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter email: {email}")
     def _input_email(self, email: str):
         """
-        Inputs the email into the corresponding field.
+        Enters the email into the email input field.
 
         Args:
-            email (str): The email to input.
+            email (str): The email address to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.email_input, email)
+            self.fill_input(EditContactPageLocators.email_input, email)
         except Exception as e:
             self._attach_screenshot("Failed to insert email")
             raise Exception(f"Error inserting email {str(e)}")
@@ -112,16 +110,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter phone number: {phone}")
     def _input_phone(self, phone: str):
         """
-        Inputs the phone number into the corresponding field.
+        Enters the phone number into the phone input field.
 
         Args:
-            phone (str): The phone number to input.
+            phone (str): The phone number to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.phone_input, phone)
+            self.fill_input(EditContactPageLocators.phone_input, phone)
         except Exception as e:
             self._attach_screenshot("Failed to insert phone")
             raise Exception(f"Error inserting phone {str(e)}")
@@ -129,16 +127,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter address line 1: {address_street_1}")
     def _input_address_street_1(self, address_street_1: str):
         """
-        Inputs the address line 1 into the corresponding field.
+        Enters the first address line into the corresponding input field.
 
         Args:
-            address_street_1 (str): The address line 1 to input.
+            address_street_1 (str): The first address line to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.address_street_1_input, address_street_1)
+            self.fill_input(EditContactPageLocators.address_street_1_input, address_street_1)
         except Exception as e:
             self._attach_screenshot("Failed to insert address_street_1")
             raise Exception(f"Error inserting address_street_1 {str(e)}")
@@ -146,16 +144,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter address line 2: {address_street_2}")
     def _input_address_street_2(self, address_street_2: str):
         """
-        Inputs the address line 2 into the corresponding field.
+        Enters the second address line into the corresponding input field.
 
         Args:
-            address_street_2 (str): The address line 2 to input.
+            address_street_2 (str): The second address line to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.address_street_2_input, address_street_2)
+            self.fill_input(EditContactPageLocators.address_street_2_input, address_street_2)
         except Exception as e:
             self._attach_screenshot("Failed to insert address_street_2")
             raise Exception(f"Error inserting address_street_2 {str(e)}")
@@ -163,16 +161,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter city: {city}")
     def _input_city(self, city: str):
         """
-        Inputs the city into the corresponding field.
+        Enters the city into the city input field.
 
         Args:
-            city (str): The city to input.
+            city (str): The city to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.city_input, city)
+            self.fill_input(EditContactPageLocators.city_input, city)
         except Exception as e:
             self._attach_screenshot("Failed to insert city")
             raise Exception(f"Error inserting city {str(e)}")
@@ -180,16 +178,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter state/province: {state_province}")
     def _input_state_province(self, state_province: str):
         """
-        Inputs the state or province into the corresponding field.
+        Enters the state or province into the state/province input field.
 
         Args:
-            state_province (str): The state or province to input.
+            state_province (str): The state or province to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.state_province_input, state_province)
+            self.fill_input(EditContactPageLocators.state_province_input, state_province)
         except Exception as e:
             self._attach_screenshot("Failed to insert state_province")
             raise Exception(f"Error inserting state_province {str(e)}")
@@ -197,16 +195,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter postal code: {postal_code}")
     def _input_postal_code(self, postal_code: str):
         """
-        Inputs the postal code into the corresponding field.
+        Enters the postal code into the postal code input field.
 
         Args:
-            postal_code (str): The postal code to input.
+            postal_code (str): The postal code to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.postal_code_input, postal_code)
+            self.fill_input(EditContactPageLocators.postal_code_input, postal_code)
         except Exception as e:
             self._attach_screenshot("Failed to insert postal_code")
             raise Exception(f"Error inserting postal_code {str(e)}")
@@ -214,16 +212,16 @@ class AddContactPage(BasePage):
     @allure.step("Enter country: {country}")
     def _input_country(self, country: str):
         """
-        Inputs the country into the corresponding field.
+        Enters the country into the country input field.
 
         Args:
-            country (str): The country to input.
+            country (str): The country to be entered.
 
         Raises:
-            Exception: If the input action fails.
+            Exception: If the input operation fails.
         """
         try:
-            self.fill_input(AddContactPageLocators.country_input, country)
+            self.fill_input(EditContactPageLocators.country_input, country)
         except Exception as e:
             self._attach_screenshot("Failed to insert country")
             raise Exception(f"Error inserting country {str(e)}")
@@ -231,39 +229,39 @@ class AddContactPage(BasePage):
     @allure.step("Click Submit button")
     def _click_submit_button(self):
         """
-        Clicks the Submit button to add the contact.
+        Clicks the Submit button to submit the form.
 
         Raises:
             Exception: If the click action fails.
         """
         try:
-            self.click(AddContactPageLocators.submit_button)
+            self.click(EditContactPageLocators.submit_button)
         except Exception as e:
             self._attach_screenshot("Failed to click submit button")
             raise Exception(f"Error clicking submit button {str(e)}")
 
-    @allure.step("Add a new contact with provided details")
-    def add_new_contact(self, first_name: str, last_name: str, email: str, phone: str | None, birthdate: str,
-                        country: str | None, city: str | None, address_street_1: str | None,
-                        address_street_2: str | None, state_province: str | None, postal_code: str | None):
+    @allure.step("Edit an existing contact with provided details")
+    def edit_contact(self, first_name: str, last_name: str, email: str, phone: str | None, birthdate: str,
+                     country: str | None, city: str | None, address_street_1: str | None,
+                     address_street_2: str | None, state_province: str | None, postal_code: str | None):
         """
-        Fills in the form to add a new contact and submits it.
+        Edits an existing contact with the provided details by filling the form and submitting it.
 
         Args:
             first_name (str): The first name of the contact.
             last_name (str): The last name of the contact.
             email (str): The email address of the contact.
-            phone (str | None): The phone number of the contact.
+            phone (str | None): The phone number of the contact (optional).
             birthdate (str): The birthdate of the contact.
-            country (str | None): The country of the contact.
-            city (str | None): The city of the contact.
-            address_street_1 (str | None): Address line 1 of the contact.
-            address_street_2 (str | None): Address line 2 of the contact.
-            state_province (str | None): The state or province of the contact.
-            postal_code (str | None): The postal code of the contact.
+            country (str | None): The country of the contact (optional).
+            city (str | None): The city of the contact (optional).
+            address_street_1 (str | None): The first line of the address (optional).
+            address_street_2 (str | None): The second line of the address (optional).
+            state_province (str | None): The state or province of the contact (optional).
+            postal_code (str | None): The postal code of the contact (optional).
 
         Raises:
-            Exception: If any input or submit action fails.
+            Exception: If any input field fails to be populated or the submit button click fails.
         """
         try:
             self._input_first_name(first_name)
@@ -279,5 +277,5 @@ class AddContactPage(BasePage):
             self._input_country(country)
             self._click_submit_button()
         except Exception as e:
-            self._attach_screenshot("Failed Adding New Contact")
-            raise Exception(f"Error Adding New Contact {str(e)}")
+            self._attach_screenshot("Failed to Update Contact")
+            raise Exception(f"Error updating contact {str(e)}")

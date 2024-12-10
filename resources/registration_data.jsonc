@@ -3,14 +3,14 @@
     "firstName": "Tester1",
     "lastName": "IsraRail",
     // Change this parameter after each run
-    "email": "isra-rail-tester99@email.com",
+    "email": "email0001-isra-rail@email.com",
     "password": "israrail"
   },
   {
     "firstName": "Tester2",
     "lastName": "IsraRail",
     // Change this parameter after each run
-    "email": "isra-rail-tester100@email.com",
-    "password": "israrail"
+    "email": "email000029@fake.com",
+    "password": "myPassword"
   }
 ]
