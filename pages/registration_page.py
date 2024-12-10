@@ -32,5 +32,11 @@ class RegistrationPage(BasePage):
         except Exception as e:
             raise Exception(f"Error inputting password. {str(e)}")
 
-    def register_user(self,frist_name:str,last_name:str,email:str,password:str):
+    def register_user(self, first_name: str, last_name: str, email: str, password: str):
         try:
+            self._input_first_name(first_name)
+            self._input_last_name(last_name)
+            self._input_email(email)
+            self._input_password(password)
+        except Exception as e:
+            raise Exception

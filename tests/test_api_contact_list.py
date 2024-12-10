@@ -2,20 +2,17 @@ import allure
 import pytest
 from playwright.sync_api import expect, APIResponse
 
+from utils.file_handler import get_json
+
 
 @allure.epic("Contact List API Testing")
 class TestContactListAPI:
 
     @allure.story("User Registration")
     @pytest.mark.api
-    def test_register_user(self, api_client):
-        payload: dict[str, object] = {
-            "firstName": "Test",
-            "lastName": "User",
-            "email": "test-rail4@fake.com",  # Change the email value after each run
-            "password": "myPassword"
-        }
-        response: APIResponse = api_client.post("users", payload)
+    @pytest.mark.parametrize("registration_credentials", get_json("resources/registration_data.jsonc"))
+    def test_register_user(self, api_client, registration_credentials: dict[str, object]):
+        response: APIResponse = api_client.post("users", registration_credentials)
 
         try:
             response_data: dict[str, object] = response.json()
@@ -46,9 +43,10 @@ class TestContactListAPI:
 
     @allure.story("User Login")
     @pytest.mark.api
-    def test_login_user(self, api_client):
-        payload: dict[str, object] = {"email": "test4@fake.com", "password": "myPassword"}
-        response: APIResponse = api_client.post("users/login", payload)
+    @pytest.mark.parametrize("login_credentials", get_json("resources/login_data.jsonc"))
+    def test_login_user(self, api_client, login_credentials: dict[str, object]):
+
+        response: APIResponse = api_client.post("users/login", login_credentials)
 
         expect(response).to_be_ok()  # Check response status
         response_data: dict[str, object] = response.json()
