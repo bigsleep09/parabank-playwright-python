@@ -1,8 +1,16 @@
 [
   {
-    "first_name": "Tester",
-    "last_name": "IsraRail",
-    "email": "tester-isra-rail@email.com",
+    "firstName": "Tester1",
+    "lastName": "IsraRail",
+    // Change this parameter after each run
+    "email": "email0001-isra-rail@email.com",
     "password": "israrail"
+  },
+  {
+    "firstName": "Tester2",
+    "lastName": "IsraRail",
+    // Change this parameter after each run
+    "email": "email000029@fake.com",
+    "password": "myPassword"
   }
 ]

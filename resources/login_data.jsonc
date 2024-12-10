@@ -1,4 +1,10 @@
 [
-  {"email": "user1@example.com", "password": "password1"},
-  {"email": "tester-isra-rail@email.com", "password": "israrail!"}
+  {
+    "email": "tester12-isra-rail@email.com",
+    "password": "israrail"
+  },
+  {
+    "email": "test9999@fake.com",
+    "password": "myPassword"
+  }
 ]
